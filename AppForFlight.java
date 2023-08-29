@@ -2,6 +2,7 @@ package userMain;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Scanner;
 
 import javax.persistence.EntityManager;
@@ -32,12 +33,12 @@ public class AppForFlight {
 		schedule.setScheduleDate(schDate);
 		schedule.setScheduleTime(schTime);
 		Flight flight1 = new Flight();
-		flight1.setFlightNumber(11118);
+		flight1.setFlightNumber(181);
 		flight1.setFlightName("AirAsia");
 		flight1.setSchedule(schedule);
 		
 		Flight flight2 = new Flight();
-		flight2.setFlightNumber(143);
+		flight2.setFlightNumber(145);
 		flight2.setFlightName("SpaceJet");
 		flight2.setSchedule(schedule);
 		
@@ -45,6 +46,12 @@ public class AppForFlight {
 		schedule.addFlight(flight2);
 		em.getTransaction().begin();
 		em.persist(schedule);
+		
+		FlightServiceImpl impl = new FlightServiceImpl();
+		
+		List<Flight> flight = impl.getAllFlightWithSchedule();
+		System.out.println(flight);
+		
 		em.getTransaction().commit();
 		
 		//FlightServiceImpl impl = new FlightServiceImpl();
